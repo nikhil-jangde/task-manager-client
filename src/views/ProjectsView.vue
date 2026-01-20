@@ -28,7 +28,7 @@
                   <div v-for="task in backlogTasks" :key="task.id" @click="selectedTask = task" class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow group cursor-pointer">
                       <div class="flex justify-between items-start">
                           <p class="font-semibold text-gray-800">{{ task.title }}</p>
-                          <button @click="deleteTask(task.id)" class="text-gray-300 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100">
+                           <button @click.stop="deleteTask(task.id)" class="text-gray-300 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100">
                              <span class="sr-only">Delete</span>
                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -37,7 +37,7 @@
                       </div>
                       <p class="text-sm text-gray-500 mt-2 line-clamp-2">{{ task.description }}</p>
                        <div class="mt-4 flex justify-end">
-                           <button @click="moveTask(task, 'in_progress')" class="text-xs font-medium bg-blue-50 text-blue-600 px-3 py-1.5 rounded-full hover:bg-blue-100 transition-colors">
+                           <button @click.stop="moveTask(task, 'in_progress')" class="text-xs font-medium bg-blue-50 text-blue-600 px-3 py-1.5 rounded-full hover:bg-blue-100 transition-colors">
                                Move to In Progress &rarr;
                            </button>
                        </div>
@@ -55,7 +55,7 @@
                   <div v-for="task in inProgressTasks" :key="task.id" @click="selectedTask = task" class="bg-white p-4 rounded-xl shadow-sm border border-blue-100 hover:shadow-md transition-shadow group cursor-pointer">
                        <div class="flex justify-between items-start">
                           <p class="font-semibold text-gray-800">{{ task.title }}</p>
-                           <button @click="deleteTask(task.id)" class="text-gray-300 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100">
+                            <button @click.stop="deleteTask(task.id)" class="text-gray-300 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100">
                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
@@ -63,10 +63,10 @@
                       </div>
                       <p class="text-sm text-gray-500 mt-2 line-clamp-2">{{ task.description }}</p>
                        <div class="mt-4 flex justify-between gap-2">
-                            <button @click="moveTask(task, 'backlog')" class="text-xs font-medium bg-gray-50 text-gray-600 px-3 py-1.5 rounded-full hover:bg-gray-100 transition-colors">
+                            <button @click.stop="moveTask(task, 'backlog')" class="text-xs font-medium bg-gray-50 text-gray-600 px-3 py-1.5 rounded-full hover:bg-gray-100 transition-colors">
                                &larr; Back
                            </button>
-                           <button @click="moveTask(task, 'completed')" class="text-xs font-medium bg-green-50 text-green-600 px-3 py-1.5 rounded-full hover:bg-green-100 transition-colors">
+                           <button @click.stop="moveTask(task, 'completed')" class="text-xs font-medium bg-green-50 text-green-600 px-3 py-1.5 rounded-full hover:bg-green-100 transition-colors">
                                Done &rarr;
                            </button>
                        </div>
