@@ -22,6 +22,10 @@
            <FolderIcon class="w-5 h-5" />
            <span class="font-medium">Projects</span>
         </RouterLink>
+        <RouterLink to="/members" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors duration-200" :class="$route.path.startsWith('/members') ? 'bg-blue-600 text-white shadow-md shadow-blue-200' : 'text-gray-600 hover:bg-gray-100'">
+           <UsersIcon class="w-5 h-5" />
+           <span class="font-medium">Members</span>
+        </RouterLink>
       </nav>
 
       <div class="p-4 border-t border-gray-100">
@@ -41,7 +45,7 @@
 
 <script setup>
 import { RouterLink, useRouter, useRoute } from 'vue-router'
-import { HomeIcon, FolderIcon, ArrowRightStartOnRectangleIcon } from '@heroicons/vue/24/outline'
+import { HomeIcon, FolderIcon, UsersIcon, ArrowRightStartOnRectangleIcon } from '@heroicons/vue/24/outline'
 import { useAuthStore } from '../../stores/auth'
 
 const auth = useAuthStore()
