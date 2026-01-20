@@ -84,14 +84,14 @@
                   <div v-for="task in completedTasks" :key="task.id" @click="selectedTask = task" class="bg-white p-4 rounded-xl shadow-sm border border-green-100 opacity-80 hover:opacity-100 transition-opacity group cursor-pointer">
                        <div class="flex justify-between items-start">
                           <p class="font-semibold text-gray-800 line-through decoration-green-500">{{ task.title }}</p>
-                           <button @click="deleteTask(task.id)" class="text-gray-300 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100">
+                           <button @click.stop="deleteTask(task.id)" class="text-gray-300 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100">
                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                           </button>
                       </div>
                        <div class="mt-4 flex justify-start">
-                            <button @click="moveTask(task, 'in_progress')" class="text-xs font-medium bg-gray-50 text-gray-500 px-3 py-1.5 rounded-full hover:bg-gray-100 transition-colors">
+                            <button @click.stop="moveTask(task, 'in_progress')" class="text-xs font-medium bg-gray-50 text-gray-500 px-3 py-1.5 rounded-full hover:bg-gray-100 transition-colors">
                                &larr; Re-open
                            </button>
                        </div>
