@@ -1,5 +1,7 @@
 <template>
-  <Pie :data="chartData" :options="chartOptions" />
+  <div class="relative h-48 w-full flex items-center justify-center">
+    <Pie :data="chartData" :options="chartOptions" />
+  </div>
 </template>
 
 <script setup>
@@ -33,7 +35,24 @@ const chartOptions = {
   maintainAspectRatio: false,
   plugins: {
       legend: {
-          position: 'bottom'
+          position: 'bottom',
+          labels: {
+            padding: 20,
+            usePointStyle: true,
+            font: {
+              size: 11
+            }
+          }
+      },
+      tooltip: {
+        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        titleColor: '#1f2937',
+        bodyColor: '#4b5563',
+        borderColor: '#e5e7eb',
+        borderWidth: 1,
+        padding: 12,
+        displayColors: true,
+        boxPadding: 6
       }
   }
 }

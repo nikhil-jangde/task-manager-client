@@ -7,25 +7,25 @@
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <!-- Total Tasks Card -->
-      <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col h-72">
-         <h3 class="text-gray-500 font-semibold mb-4 border-b border-gray-100 pb-2">Total Tasks</h3>
+      <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col h-80">
+         <h3 class="text-gray-500 font-semibold mb-2 border-b border-gray-100 pb-2 text-sm uppercase tracking-wider">Total Tasks</h3>
          <div class="flex-1 flex items-center justify-center">
              <div class="text-7xl font-bold text-gray-800">{{ stats?.total || 0 }}</div>
          </div>
       </div>
 
        <!-- Distribution Card -->
-      <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col h-72">
-         <h3 class="text-gray-500 font-semibold mb-4 border-b border-gray-100 pb-2">Tasks Distribution</h3>
-         <div class="flex-1 relative">
+      <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col h-80">
+         <h3 class="text-gray-500 font-semibold mb-2 border-b border-gray-100 pb-2 text-sm uppercase tracking-wider">Tasks Distribution</h3>
+         <div class="flex-1 flex items-center justify-center overflow-hidden">
              <StatusPieChart v-if="stats" :stats="stats.distribution" />
          </div>
       </div>
 
       <!-- Progress Card -->
-      <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col h-72">
-         <h3 class="text-gray-500 font-semibold mb-4 border-b border-gray-100 pb-2">Task Progress</h3>
-         <div class="flex-1 flex items-center justify-center">
+      <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col h-80">
+         <h3 class="text-gray-500 font-semibold mb-2 border-b border-gray-100 pb-2 text-sm uppercase tracking-wider">Task Progress</h3>
+         <div class="flex-1 flex items-center justify-center overflow-hidden">
             <ProgressDoughnut v-if="stats" :percentage="stats.percentage" />
          </div>
       </div>

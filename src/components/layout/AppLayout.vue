@@ -37,7 +37,7 @@
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 ml-64 p-8">
+    <main class="flex-1 ml-64 p-8 overflow-auto h-screen">
       <slot />
     </main>
   </div>
