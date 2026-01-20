@@ -62,11 +62,23 @@
           </div>
           <div v-if="!isEditing">
             <label class="block text-sm font-semibold text-gray-700 mb-1">Password</label>
-            <input v-model="form.password" required type="password" class="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-blue-500 outline-none transition-all" placeholder="••••••••">
+            <div class="relative">
+              <input v-model="form.password" required :type="showPassword ? 'text' : 'password'" class="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-blue-500 outline-none transition-all pr-12" placeholder="••••••••">
+              <button type="button" @click="showPassword = !showPassword" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors">
+                <EyeIcon v-if="!showPassword" class="w-5 h-5" />
+                <EyeSlashIcon v-else class="w-5 h-5" />
+              </button>
+            </div>
           </div>
           <div v-else>
             <label class="block text-sm font-semibold text-gray-700 mb-1">New Password (leave blank to keep current)</label>
-            <input v-model="form.password" type="password" class="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-blue-500 outline-none transition-all" placeholder="••••••••">
+            <div class="relative">
+              <input v-model="form.password" :type="showPassword ? 'text' : 'password'" class="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-blue-500 outline-none transition-all pr-12" placeholder="••••••••">
+              <button type="button" @click="showPassword = !showPassword" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors">
+                <EyeIcon v-if="!showPassword" class="w-5 h-5" />
+                <EyeSlashIcon v-else class="w-5 h-5" />
+              </button>
+            </div>
           </div>
 
           <div class="flex justify-end gap-3 mt-8">
@@ -84,6 +96,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import axios from 'axios'
+import { EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/outline'
 import AppLayout from '../components/layout/AppLayout.vue'
 import { useAuthStore } from '../stores/auth'
 
@@ -92,6 +105,7 @@ const searchQuery = ref('')
 const auth = useAuthStore()
 
 const showModal = ref(false)
+const showPassword = ref(false)
 const isEditing = ref(false)
 const loading = ref(false)
 const editingId = ref(null)
