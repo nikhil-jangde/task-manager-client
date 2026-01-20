@@ -2,13 +2,26 @@
   <div class="flex h-screen bg-gray-50 font-sans">
     <!-- Sidebar -->
     <aside class="w-64 bg-white border-r border-gray-200 flex flex-col fixed h-full z-10">
-      <div class="p-8 flex items-center gap-3">
+      <div class="p-8 pb-4 flex items-center gap-3">
         <div class="bg-blue-600 p-1.5 rounded text-white shadow-lg">
            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
         </div>
         <span class="text-2xl font-bold text-gray-800 tracking-tight">TaskMgr</span>
+      </div>
+
+      <!-- User Profile Card in Sidebar -->
+      <div v-if="auth.user" class="px-6 py-4 mb-6">
+          <div class="bg-gray-50 rounded-2xl p-4 border border-gray-100 flex items-center gap-3 shadow-inner">
+              <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold border-2 border-white shadow-sm">
+                  {{ auth.user.name.charAt(0).toUpperCase() }}
+              </div>
+              <div class="flex-1 min-w-0">
+                  <p class="text-sm font-bold text-gray-800 truncate">{{ auth.user.name }}</p>
+                  <p class="text-xs text-gray-400 truncate">ID: #{{ auth.user.id }}</p>
+              </div>
+          </div>
       </div>
       
       <div class="px-6 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Menu</div>
