@@ -25,7 +25,7 @@
                   </button>
               </div>
               <div class="space-y-3">
-                  <div v-for="task in backlogTasks" :key="task.id" class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
+                  <div v-for="task in backlogTasks" :key="task.id" @click="selectedTask = task" class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow group cursor-pointer">
                       <div class="flex justify-between items-start">
                           <p class="font-semibold text-gray-800">{{ task.title }}</p>
                           <button @click="deleteTask(task.id)" class="text-gray-300 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100">
@@ -52,7 +52,7 @@
                   <span class="text-xs text-blue-400 font-semibold">{{ inProgressTasks.length }} tasks</span>
               </div>
                <div class="space-y-3">
-                  <div v-for="task in inProgressTasks" :key="task.id" class="bg-white p-4 rounded-xl shadow-sm border border-blue-100 hover:shadow-md transition-shadow group">
+                  <div v-for="task in inProgressTasks" :key="task.id" @click="selectedTask = task" class="bg-white p-4 rounded-xl shadow-sm border border-blue-100 hover:shadow-md transition-shadow group cursor-pointer">
                        <div class="flex justify-between items-start">
                           <p class="font-semibold text-gray-800">{{ task.title }}</p>
                            <button @click="deleteTask(task.id)" class="text-gray-300 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100">
@@ -81,7 +81,7 @@
                   <span class="text-xs text-green-400 font-semibold">{{ completedTasks.length }} tasks</span>
               </div>
                <div class="space-y-3">
-                  <div v-for="task in completedTasks" :key="task.id" class="bg-white p-4 rounded-xl shadow-sm border border-green-100 opacity-80 hover:opacity-100 transition-opacity group">
+                  <div v-for="task in completedTasks" :key="task.id" @click="selectedTask = task" class="bg-white p-4 rounded-xl shadow-sm border border-green-100 opacity-80 hover:opacity-100 transition-opacity group cursor-pointer">
                        <div class="flex justify-between items-start">
                           <p class="font-semibold text-gray-800 line-through decoration-green-500">{{ task.title }}</p>
                            <button @click="deleteTask(task.id)" class="text-gray-300 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100">
@@ -120,17 +120,22 @@
               </form>
           </div>
       </div>
+
+      <!-- View Details Modal -->
+      <TaskDetailsModal v-if="selectedTask" :task="selectedTask" @close="selectedTask = null" />
   </AppLayout>
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import AppLayout from '../components/layout/AppLayout.vue'
+import TaskDetailsModal from '../components/modals/TaskDetailsModal.vue'
 import { useTaskStore } from '../stores/tasks'
 
 const taskStore = useTaskStore()
 
 const showAddModal = ref(false)
+const selectedTask = ref(null)
 const newTask = ref({ title: '', description: '' })
 
 // Load tasks
@@ -170,6 +175,10 @@ const submitTask = async () => {
 
 const moveTask = async (task, status) => {
     await taskStore.updateTaskStatus(task.id, status)
+    // Update local selected task if open
+    if (selectedTask.value && selectedTask.value.id === task.id) {
+        selectedTask.value.status = status
+    }
 }
 
 const deleteTask = async (id) => {
