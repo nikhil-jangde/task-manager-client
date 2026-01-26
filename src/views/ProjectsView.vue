@@ -131,12 +131,15 @@ import { ref, computed, onMounted } from 'vue'
 import AppLayout from '../components/layout/AppLayout.vue'
 import TaskDetailsModal from '../components/modals/TaskDetailsModal.vue'
 import { useTaskStore } from '../stores/tasks'
+import { useAuthStore } from '../stores/auth'
 
 const taskStore = useTaskStore()
 
 const showAddModal = ref(false)
 const selectedTask = ref(null)
 const newTask = ref({ title: '', description: '' })
+const auth = useAuthStore();
+const user = auth.user
 
 // Load tasks
 onMounted(async () => {
@@ -169,7 +172,7 @@ const openAddTask = () => {
 }
 
 const submitTask = async () => {
-    await taskStore.addTask({ ...newTask.value, status: 'backlog' })
+    await taskStore.addTask({ ...newTask.value, status: 'backlog', user_id: user.id })
     showAddModal.value = false
 }
 
